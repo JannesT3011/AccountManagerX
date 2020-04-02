@@ -1,4 +1,5 @@
 import mysql.connector as mysql
+import uuid
 
 class Database:
     def __init__(self):
@@ -19,7 +20,7 @@ class Database:
 
     def setup(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS accounts (
-            id int NOT NULL UNIQUE PRIMARY KEY AUTO_INCREMENT,
+            id VARCHAR(36) NOT NULL UNIQUE PRIMARY KEY,
             username VARCHAR(40) NOT NULL UNIQUE,
             password VARCHAR(50) NOT NULL,
             email VARCHAR(64) NOT NULL,
@@ -34,3 +35,6 @@ class Database:
             self.cursor.execute(query, values)
         except mysql.Error as error:
             print(f"<DATABASE> Error: {error}")
+    
+    def id(self) -> str:
+        return str(uuid.uuid4())

@@ -1,5 +1,5 @@
-from api.models import Account
-from api.database import Database
+from ..models import Account
+from ..database import Database
 
 db = Database()
 
@@ -7,20 +7,57 @@ class Acc:
     @staticmethod
     def create_account(account: Account):
         db.check_connection()
-        query = ""
-    
+        query = """INSERT INTO accounts (id, username, password, email, name, link, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())    
+                """
+        values = (account.id, account.username, account.password, account.email, account.name, account.link)
+        db.execute(query, values)
+        db.connector.commit()
+        return
+
     @staticmethod
     def get_accounts() -> list:
         db.check_connection()
-        query = ""
+        query = "SELECT * FROM accounts"
+        results = []
+        db.execute(query)
+        for result in db.cursor.fetchall():
+            results.append(result)
+        
+        return results
     
     @staticmethod
-    def delete_accounts():
+    def delete_accounts(id: str):
         db.check_connection()
-        query = ""
+        query = "DELETE FROM accounts WHERE id=?"
+        db.execute(query, (id))
+        db.connector.commit()
 
     @staticmethod
-    def update_account():
+    def update_account(account: Account):
         db.check_connection()
-        query = ""
+        if account.username is not None:
+            db.execute("UPDATE projects SET username=? WHERE id=?", (account.username, account.id))
+        if account.password is not None:
+            db.execute("UPDATE projects SET password=? WHERE id=?", (account.password, account.id))
+        if account.email is not None:
+            db.execute("UPDATE projects SET email=? WHERE id=?", (account.email, account.id))
+        if account.name is not None:
+            db.execute("UPDATE projects SET name=? WHERE id=?", (account.name, account.id))
+        if account.link is not None:
+            db.execute("UPDATE projects SET link=? WHERE id=?", (account.link, account.id))
         
+        db.connector.commit()
+    
+    @staticmethod
+    def get_accountdata(id: str):
+        db.check_connection()
+        db.execute("SELECT * FROM accounts WHERE id=?", (id))
+        for result in db.cursor.fetchall():
+            return result
+    
+    @staticmethod
+    def init_database():
+        db.check_connection()
+        db.setup()
+        db.connector.commit()        
