@@ -9,7 +9,7 @@ api = Blueprint("api", __name__, url_prefix="/api")
 
 @api.route("/accounts")
 def accounts():
-    return jsonify({"accounts": Acc.get_accounts()}), 200
+    return jsonify(Acc.get_accounts()), 200
 
 @api.route("/account/create")
 def account_create():
@@ -34,3 +34,7 @@ def account_update():
 def app_init():
     Acc.init_database()
     return jsonify({"message": "Init database successfully!"}), 200
+
+@api.route("/test", methods=["GET"])
+def test():
+    return jsonify({"message": "Hello World"})

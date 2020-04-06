@@ -22,7 +22,8 @@ class Acc:
         results = []
         db.execute(query)
         for result in db.cursor.fetchall():
-            results.append(result)
+            push_data = {"id": result[0], "username": result[1], "password": result[2], "email": result[3], "name": result[4], "link": result[5], "created_at": result[6]}
+            results.append(push_data)
         
         return results
     
