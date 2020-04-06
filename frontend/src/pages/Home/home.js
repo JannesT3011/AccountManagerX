@@ -1,4 +1,5 @@
 import React from 'react';
+import "./home.scss"
 
 class Home extends React.Component {  
     state = {
@@ -21,14 +22,19 @@ class Home extends React.Component {
             accounts: data,
         });
         let el = []
-    this.state.accounts.map((data) => {el.push(<div><h1><a href={data.link}>{data.name}</a></h1><h2>{data.username}</h2><h2>{data.email}</h2><h2>{data.password}</h2></div>)})
-        this.setState({elements: el})
+        this.state.accounts.map((data) => {el.push(<div class="account"><h1><a href={data.link}>{data.name}</a></h1><h2>{data.username}</h2><h2>{data.email}</h2><h2>{data.password}</h2></div>)})
+            this.setState({elements: el})
     }
 
     render() {
         return (
         <div>
-            {this.state.elements}
+            <div class="accounts">
+                {this.state.elements}
+                <div class="account">
+                    <a href="/addAccount"><h2>Add new account</h2></a>
+                </div>
+            </div>
         </div>
         )
     } 

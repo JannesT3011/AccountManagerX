@@ -9,7 +9,7 @@ class App extends React.Component {
   render() {
     return(
       <Router>
-        <Route path="/" exact component={Home}/>
+        <Route path={["/", "/home", "/index"]} component={Home}/>
         <Route path="/addAccount" exact component={AddAccount}/>
       </Router>
     )

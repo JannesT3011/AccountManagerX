@@ -1,0 +1,18 @@
+$divWidth: 300px;
+$divHeight: 400px;
+$div_color: #263238;
+$background_color: #212121;
+
+html {
+    background-color: $background_color;
+}
+
+.account {
+    background-color: $div_color;
+    border: 1px solid red;
+    float: left;
+    margin: 15px;
+    width: $divWidth;
+    height: $divHeight;
+    padding: 20px;
+}
