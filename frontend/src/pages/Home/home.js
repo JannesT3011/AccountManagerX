@@ -1,18 +1,20 @@
 import React from 'react';
 import "./home.scss"
+import AddAccount from "../AddAccount/addAccount"
 
 class Home extends React.Component {  
     state = {
         loading: true,
+        show_add:false,
         accounts: null,
-        elements: null
+        elements: null,
     }
 
-    createDiv() {
-        for (let object of this.state.accounts) {
-            console.log(object)
-        }
-    }
+    togglePopup() {
+        this.setState({
+          showPopup: !this.state.show_add
+        });
+      }
 
     async componentDidMount() {
         const url = "/api/accounts"
@@ -22,17 +24,17 @@ class Home extends React.Component {
             accounts: data,
         });
         let el = []
-        this.state.accounts.map((data) => {el.push(<div class="account"><h1><a href={data.link}>{data.name}</a></h1><h2>{data.username}</h2><h2>{data.email}</h2><h2>{data.password}</h2></div>)})
+        this.state.accounts.map((data) => {el.push(<div className="account"><h1><a href={data.link}>{data.name}</a></h1><hr></hr><h2>{data.username}</h2><h2>{data.email}</h2><h2>{data.password}</h2></div>)})
             this.setState({elements: el})
     }
 
     render() {
         return (
         <div>
-            <div class="accounts">
+            <div className="accounts">
                 {this.state.elements}
-                <div class="account">
-                    <a href="/addAccount"><h2>Add new account</h2></a>
+                <div className="account add-new">
+                    <button onClick={this.togglePopup.bind(this)}>Add new account</button>
                 </div>
             </div>
         </div>
