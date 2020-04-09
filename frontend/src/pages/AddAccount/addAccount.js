@@ -2,9 +2,14 @@ import React from 'react';
 import "./addAccount.scss"
 
 class AddAccount extends React.Component {
-  
+
     handleClick = () => {
       this.props.toggle()
+      var elements = document.getElementsByClassName("account")
+      var i;
+      for (i=0; i < elements.length; i++) {
+          elements[i].style.filter = "blur(0px)"
+      }
     }
 
     async handleSubmit(event) {
@@ -35,7 +40,7 @@ class AddAccount extends React.Component {
 
                   <input type="text" id="alink" name="alink" placeholder="Enter link to website"/>
 
-                  <input type="submit" value="ADD!"></input>
+                  <input type="submit" value="ADD!" className="submit"></input>
                 </form>
                 <button onClick={this.handleClick}>CLOSE!</button>
               </div>

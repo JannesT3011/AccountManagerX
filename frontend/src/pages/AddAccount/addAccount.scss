@@ -1,6 +1,6 @@
-$divWidth: 600px;
-$divHeight: 350px;
-$div_color: #009688;
+$divWidth: 400px;
+$divHeight: 300px;
+$div_color: #607D8B;
 $background_color: #212121;
 $font_color: #212121;
 $button_color: #00BCD4;
@@ -10,35 +10,51 @@ $font_main: 'Roboto Slab', serif;
 h1 {
     margin: 0;
     padding: 0;
-  }
-  html, body, .app:before {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-  }
-  .popup {
-    position: fixed;
-    width: $divWidth;
-    height: $divHeight;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background-color:$div_color;
-    border-radius: 10px;
-    border: 2px solid $background_color;
-    text-align: center;
-  }
+}
+
+html, body, .app:before {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.popup {
+  position: fixed;
+  width: $divWidth;
+  height: $divHeight;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color:$div_color;
+  border-radius: 10px;
+  border: 2px solid $background_color;
+  text-align: center;
+}
+
 .form {
   display: inline-block;
 }
 
-  input {
-    border-radius: 10px;
-    height: 20px;
-    width:200px;
-    font-family: $font_main;
-  }
+input {
+  margin-top: 3%;
+  border-radius: 10px;
+  height: 25px;
+  width:300px;
+  font-family: $font_main;
+}
+
+.submit {
+  margin-top: 5%;
+  height: 40px;
+  width: 300px;
+  font-family: $font_main;
+}
+
+.submit:hover {
+  background-color: darken($button_color, 5%);
+  color: white;
+}  
