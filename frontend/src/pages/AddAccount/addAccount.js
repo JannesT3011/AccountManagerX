@@ -22,6 +22,8 @@ class AddAccount extends React.Component {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body),
       });
+      document.getElementsByClassName("add-account-form")[0].reset()
+      window.location.reload()
     }
 
     render() { 
@@ -29,7 +31,7 @@ class AddAccount extends React.Component {
             
             <div className='popup'>
               <div className="inner">
-                <form  onSubmit={this.handleSubmit}> 
+                <form  onSubmit={this.handleSubmit} className="add-account-form"> 
                   <input type="text" id="aname" name="aname" placeholder="Name" required/>
 
                   <input type="text" id="ausername" name="ausername" placeholder="Username" required/>

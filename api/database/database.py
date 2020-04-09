@@ -21,7 +21,7 @@ class Database:
     def setup(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS accounts (
             id VARCHAR(36) NOT NULL UNIQUE PRIMARY KEY,
-            username VARCHAR(40) NOT NULL UNIQUE,
+            username VARCHAR(40) NOT NULL,
             password VARCHAR(50) NOT NULL,
             email VARCHAR(64) NOT NULL,
             name VARCHAR(64) NOT NULL,
