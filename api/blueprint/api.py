@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from ..models import Account
 from ..util import Acc
 from ..database import Database
@@ -11,11 +11,14 @@ api = Blueprint("api", __name__, url_prefix="/api")
 def accounts():
     return jsonify(Acc.get_accounts()), 200
 
-@api.route("/account/create")
+@api.route("/account/create", methods=["POST"])
 def account_create():
-    new_account = Account("username", "password", "email", "name", "link", db.id())
+    data = request.get_json()
+    if data["link"] == "":
+        data["link"] = None
+    new_account = Account(data["username"], data["password"], data["email"], data["name"], data["link"], db.id())
     Acc.create_account(new_account)
-    return {"message": new_account}, 200
+    return jsonify(request.get_json()), 200
 
 @api.route("/account/delete")
 def account_delete():

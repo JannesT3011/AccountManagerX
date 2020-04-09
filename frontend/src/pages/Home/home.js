@@ -3,18 +3,13 @@ import "./home.scss"
 import AddAccount from "../AddAccount/addAccount"
 
 class Home extends React.Component {  
+ 
     state = {
         loading: true,
-        show_add:false,
+        seen: false,
         accounts: null,
         elements: null,
     }
-
-    togglePopup() {
-        this.setState({
-          showPopup: !this.state.show_add
-        });
-      }
 
     async componentDidMount() {
         const url = "/api/accounts"
@@ -28,17 +23,22 @@ class Home extends React.Component {
             this.setState({elements: el})
     }
 
+    togglePop = () => {
+        this.setState({seen: !this.state.seen})
+    }
+
     render() {
         return (
-        <div>
+        <div className="Main">
             <div className="accounts">
                 {this.state.elements}
-                <div className="account add-new">
-                    <button onClick={this.togglePopup.bind(this)}>Add new account</button>
+                <div className="account add-new" onClick={this.togglePop}>
+                    <button>Add new account</button>  
                 </div>
+                {this.state.seen ? <AddAccount toggle={this.togglePop}/> : null}
             </div>
         </div>
-        )
+        ) 
     } 
 }
 

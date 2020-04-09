@@ -8,7 +8,7 @@ class Acc:
     def create_account(account: Account):
         db.check_connection()
         query = """INSERT INTO accounts (id, username, password, email, name, link, created_at)
-                   VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())    
+                   VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP())    
                 """
         values = (account.id, account.username, account.password, account.email, account.name, account.link)
         db.execute(query, values)
@@ -30,7 +30,7 @@ class Acc:
     @staticmethod
     def delete_accounts(id: str):
         db.check_connection()
-        query = "DELETE FROM accounts WHERE id=?"
+        query = "DELETE FROM accounts WHERE id=%s"
         db.execute(query, (id))
         db.connector.commit()
 
@@ -38,22 +38,22 @@ class Acc:
     def update_account(account: Account):
         db.check_connection()
         if account.username is not None:
-            db.execute("UPDATE projects SET username=? WHERE id=?", (account.username, account.id))
+            db.execute("UPDATE projects SET username=%s WHERE id=%s", (account.username, account.id))
         if account.password is not None:
-            db.execute("UPDATE projects SET password=? WHERE id=?", (account.password, account.id))
+            db.execute("UPDATE projects SET password=%s WHERE id=%s", (account.password, account.id))
         if account.email is not None:
-            db.execute("UPDATE projects SET email=? WHERE id=?", (account.email, account.id))
+            db.execute("UPDATE projects SET email=%s WHERE id=%s", (account.email, account.id))
         if account.name is not None:
-            db.execute("UPDATE projects SET name=? WHERE id=?", (account.name, account.id))
+            db.execute("UPDATE projects SET name=%s WHERE id=%s", (account.name, account.id))
         if account.link is not None:
-            db.execute("UPDATE projects SET link=? WHERE id=?", (account.link, account.id))
+            db.execute("UPDATE projects SET link=%s WHERE id=%s", (account.link, account.id))
         
         db.connector.commit()
     
     @staticmethod
     def get_accountdata(id: str):
         db.check_connection()
-        db.execute("SELECT * FROM accounts WHERE id=?", (id))
+        db.execute("SELECT * FROM accounts WHERE id=%s", (id))
         for result in db.cursor.fetchall():
             return result
     
