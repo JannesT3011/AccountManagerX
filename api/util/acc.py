@@ -40,15 +40,15 @@ class Acc:
     def update_account(account: Account):
         db.check_connection()
         if account.username is not None:
-            db.execute("UPDATE projects SET username=%s WHERE id=%s", (account.username, account.id))
+            db.execute("UPDATE accounts SET username=%s WHERE id=%s", (account.username, account.id))
         if account.password is not None:
-            db.execute("UPDATE projects SET password=%s WHERE id=%s", (account.password, account.id))
+            db.execute("UPDATE accounts SET password=%s WHERE id=%s", (account.password, account.id))
         if account.email is not None:
-            db.execute("UPDATE projects SET email=%s WHERE id=%s", (account.email, account.id))
+            db.execute("UPDATE accounts SET email=%s WHERE id=%s", (account.email, account.id))
         if account.name is not None:
-            db.execute("UPDATE projects SET name=%s WHERE id=%s", (account.name, account.id))
+            db.execute("UPDATE accounts SET name=%s WHERE id=%s", (account.name, account.id))
         if account.link is not None:
-            db.execute("UPDATE projects SET link=%s WHERE id=%s", (account.link, account.id))
+            db.execute("UPDATE accounts SET link=%s WHERE id=%s", (account.link, account.id))
         
         db.connector.commit()
     

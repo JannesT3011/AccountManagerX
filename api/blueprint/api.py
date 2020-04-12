@@ -24,14 +24,14 @@ def account_create():
 def account_delete():
     data = request.get_json()
     Acc.delete_accounts(data["id"]) 
-    return jsonify({"message": "Account deleted"}), 200
+    return jsonify({"message": f"Account {data['id']} deleted"}), 200
 
 @api.route("/account/update", methods=["POST"])
 def account_update():
-    # TODO if field not updated => None 
-    update_account = Account("new_username", "new_password", "new_email", "new_name", "new_link", "new_id")
+    data = request.get_json()
+    update_account = Account(data["username"], data["password"], data["email"], data["name"], data["link"], data["id"])
     Acc.update_account(update_account)
-    return jsonify({"Account": Acc.get_accountdata("id")}), 200
+    return jsonify({"message": f"Updated id: {data['id']}"}), 200
 
 #config  stuff
 @api.route("/app/init")
