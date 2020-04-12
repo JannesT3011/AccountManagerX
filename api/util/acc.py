@@ -30,9 +30,11 @@ class Acc:
     @staticmethod
     def delete_accounts(id: str):
         db.check_connection()
-        query = "DELETE FROM accounts WHERE id=%s"
-        db.execute(query, (id))
+        values = (id, )
+        query = "DELETE FROM accounts WHERE id = %s"
+        db.execute(query, values)
         db.connector.commit()
+        return
 
     @staticmethod
     def update_account(account: Account):

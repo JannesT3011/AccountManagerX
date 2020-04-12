@@ -5,11 +5,12 @@ class AddAccount extends React.Component {
 
     handleClick = () => {
       this.props.toggle()
-      var elements = document.getElementsByClassName("account")
-      var i;
+      let elements = document.getElementsByClassName("account")
+      let i;
       for (i=0; i < elements.length; i++) {
           elements[i].style.filter = "blur(0px)"
       }
+      window.location.reload()
     }
 
     async handleSubmit(event) {
@@ -23,7 +24,6 @@ class AddAccount extends React.Component {
         body: JSON.stringify(body),
       });
       document.getElementsByClassName("add-account-form")[0].reset()
-      window.location.reload()
     }
 
     render() { 
@@ -40,7 +40,7 @@ class AddAccount extends React.Component {
 
                   <input type="email" id="aemail" name="aemail" placeholder="E-Mail" required/>
 
-                  <input type="text" id="alink" name="alink" placeholder="Enter link to website"/>
+                  <input type="text" id="alink" name="alink" placeholder="Link to Website"/>
 
                   <input type="submit" value="ADD!" className="submit"></input>
                 </form>
